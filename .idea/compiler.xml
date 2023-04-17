@@ -7,16 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ListaSE-main" />
         <module name="tads" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ListaSE-main" target="17" />
       <module name="tads" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="tads" options="-parameters" />
+      <module name="ListaSE-main" options="-parameters" />
+      <module name="tads" options="" />
     </option>
   </component>
 </project>

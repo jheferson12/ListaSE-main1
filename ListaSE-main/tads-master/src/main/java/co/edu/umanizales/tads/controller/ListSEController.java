@@ -29,17 +29,15 @@ public class ListSEController {
    List<Kid>listKid1=new ArrayList<>();
 
 //En esta parte del codigo vemos que el getMaping sirve para enviar el HTTP o la url hacer por
-    @GetMapping(path = "/kid/{age}")
-    public ResponseEntity<Void>addKid(@PathVariable byte age){
-        listKid1.add(new Kid("123456","Jose",(byte)12,"Manizales",'M',"123456","colombia"));
-            return ResponseEntity.ok().build();
-    }
+
+
+    //todos los 12 metodos
     private ListSEService listKid;
 // Esta parte es el promedio de edades
     @GetMapping(path = "/average-age")
     public ResponseEntity<ResponseDTO>avergeAge(){
         return new ResponseEntity<>(new ResponseDTO(200,
-                "el promedio comcluido fue: "+listSEService.getAverageAge(),null),HttpStatus.OK);
+                "el promedio concluido fue: "+listSEService.getAverageAge(),null),HttpStatus.OK);
 
     }
 //Esta parte es la cantidad de niños en la ciudad
@@ -125,11 +123,20 @@ public class ListSEController {
             int count = listSEService.getKids().getCountKidsByLocationCode(loc.getCode());
             if(count>0){
                 kidsByLocationDTOList.add(new KidsByLocationDTO(loc,count));
+            }else
+            if(count== 0) {
+                return new ResponseEntity<>(new ResponseDTO(409,
+                        "no existen niños con este codigo de localizacion  ", null),
+                        HttpStatus.BAD_REQUEST);
+
+
+            } else {
+                return new ResponseEntity<>(new ResponseDTO(
+                        200,kidsByLocationDTOList, null), HttpStatus.OK);
             }
         }
-        return new ResponseEntity<>(new ResponseDTO(
-                200,kidsByLocationDTOList,
-                null), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseDTO(200,
+                kidsByLocationDTOList,null), HttpStatus.OK);
     }
     //invertir lista
     @GetMapping("/invert")
